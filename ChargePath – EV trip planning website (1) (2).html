@@ -1,0 +1,261 @@
+<!doctype html><html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>ChargePath – Plan the trip, not the worry | EV trip planner for India</title>
+<meta name="description" content="A friendly EV trip planner that finds charging stops, estimates time and warns you early.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f2fa;--c:#fff;--ink:#241f45;--m:#5a5678;--l:#ddd8ee;--t:#0f9d8c;--ti:#fff;--y:#ffbd3d;--p:#e7e2f7;--s1:#ffe8b8;--s2:#f4f2fa;--h1:#b9e3da;--h2:#8fd0c4;--dk:#241f45;--dt:#f4f2fa}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#15122b;--c:#1e1a3a;--ink:#f1eefc;--m:#a9a4c8;--l:#332e57;--t:#3ccdb9;--ti:#10222a;--y:#ffc95e;--p:#2a2550;--s1:#4a3a5c;--s2:#15122b;--h1:#1d4a52;--h2:#17625f;--dk:#0e0b20;--dt:#f1eefc}}
+:root[data-theme=dark]{--bg:#15122b;--c:#1e1a3a;--ink:#f1eefc;--m:#a9a4c8;--l:#332e57;--t:#3ccdb9;--ti:#10222a;--y:#ffc95e;--p:#2a2550;--s1:#4a3a5c;--s2:#15122b;--h1:#1d4a52;--h2:#17625f;--dk:#0e0b20;--dt:#f1eefc}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,"Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;line-height:1.1;margin:0;letter-spacing:-.02em}a{color:inherit}
+.w{max-width:1100px;margin:auto;padding:0 22px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}.nav b{font:800 22px "Bricolage Grotesque",system-ui,sans-serif;display:flex;align-items:center;gap:8px}.nav b i{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--y);color:#241f45;font-style:normal;font-size:17px}
+.nav div{display:flex;gap:22px;align-items:center;font-size:15px}.nav a{text-decoration:none;color:var(--m)}@media(max-width:640px){.nav .h{display:none}}
+.btn{display:inline-block;background:var(--t);color:var(--ti)!important;padding:13px 24px;border-radius:99px;font-weight:700;text-decoration:none;transition:transform .15s}.btn:hover{transform:translateY(-2px)}.btn.o{background:none;color:var(--ink)!important;border:2px solid var(--l)}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:36px;align-items:center;padding:30px 0 50px}@media(max-width:860px){.hero{grid-template-columns:1fr}}
+h1{font-size:clamp(40px,6.2vw,66px);font-weight:800}.hero p{font-size:19px;color:var(--m);max-width:28em;margin:18px 0 26px}.hero .btn{margin:0 10px 10px 0}
+.scene{border-radius:28px;overflow:hidden;background:var(--c);border:1px solid var(--l)}.scene svg{display:block;width:100%;height:auto}
+.car{animation:drive 3.2s cubic-bezier(.3,.7,.3,1) both}@keyframes drive{from{transform:translateX(-170px)}to{transform:translateX(0)}}.bub{animation:pop .5s 2.6s both}@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.car,.bub{animation:none}html{scroll-behavior:auto}}
+section{padding:60px 0}section h2{font-size:clamp(30px,4.4vw,44px);font-weight:800;max-width:16em;margin-bottom:12px}.lead{color:var(--m);max-width:34em;margin:0 0 30px}
+.try{display:grid;grid-template-columns:1fr 1fr;gap:28px;background:var(--p);border-radius:28px;padding:32px;align-items:center}@media(max-width:760px){.try{grid-template-columns:1fr;padding:22px}}
+.try label{display:flex;justify-content:space-between;color:var(--m);font-weight:600;margin-top:14px}.try label b{color:var(--ink)}input[type=range]{width:100%;accent-color:var(--t)}
+.say{background:var(--c);border-radius:22px;padding:22px;position:relative}.say strong{font:800 26px "Bricolage Grotesque",system-ui,sans-serif;display:block;margin-bottom:6px}.say svg{width:100%;height:auto;margin-top:12px}svg text{fill:var(--m);font:12px Nunito,system-ui,sans-serif}
+.story{display:grid;grid-template-columns:1fr 1.2fr;gap:40px}@media(max-width:800px){.story{grid-template-columns:1fr}}
+.tl{border-left:3px dashed var(--h2);padding-left:20px}.tl div{position:relative;margin-bottom:22px}.tl div::before{content:"";position:absolute;left:-29px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--y);border:3px solid var(--bg)}.tl h3{font-size:18px}.tl small{color:var(--m);font-weight:600}.tl p{margin:2px 0 0;color:var(--m)}
+.worry{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.worry div{border-radius:22px;padding:22px}.worry div:nth-child(1){background:var(--s1)}.worry div:nth-child(2){background:var(--h1)}.worry div:nth-child(3){background:var(--p)}.worry h3{font-size:20px;margin-bottom:8px}.worry p{margin:0}.worry p+p{margin-top:8px;font-weight:700}
+.can{columns:2;column-gap:40px;padding:0;list-style:none;margin:0}@media(max-width:700px){.can{columns:1}}.can li{break-inside:avoid;padding:14px 0 14px 34px;position:relative;border-top:1px solid var(--l)}.can li::before{content:"✓";position:absolute;left:0;top:14px;width:24px;height:24px;border-radius:50%;background:var(--t);color:var(--ti);display:grid;place-items:center;font-size:13px;font-weight:700}.can b{display:block}.can span{color:var(--m);font-size:16px}
+.dk{background:var(--dk);color:var(--dt);border-radius:28px;padding:44px;margin:20px 0}.dk h2{margin-bottom:10px}.dk p{opacity:.8;max-width:36em;margin:0}.dk ul{columns:2;padding-left:18px;margin:18px 0 0;opacity:.9}@media(max-width:640px){.dk{padding:26px}.dk ul{columns:1}}
+details{border-top:1px solid var(--l);padding:16px 0}details:last-of-type{border-bottom:1px solid var(--l)}summary{font:700 19px "Bricolage Grotesque",system-ui,sans-serif;cursor:pointer}details p{color:var(--m);margin:8px 0 0;max-width:40em}
+.cta{text-align:center;padding:70px 0 50px}.cta h2{margin:0 auto 12px}.cta p{color:var(--m);margin:0 0 24px}footer{padding:20px 0 34px;color:var(--m);font-size:14px;text-align:center}
+:focus-visible{outline:3px solid var(--t);outline-offset:3px}
+.pl{width:100%;height:min(1100px,88vh);min-height:620px;border:1px solid var(--l);border-radius:22px;background:var(--c)}.plnote{color:var(--m);font-size:14px;margin:10px 0 0}</style></head><body>
+<div class="w"><div class="nav"><b><i>⚡</i>ChargePath</b><div><a class="h" href="#try">Try it</a><a class="h" href="#planner">Planner</a><a class="h" href="#story">A real-feeling trip</a><a class="h" href="#can">What it does</a><a class="btn" href="#planner">Open the planner</a></div></div>
+
+<div class="hero"><div><h1>Plan the trip, not the worry.</h1><p>ChargePath finds your charging stops, tells you how long they'll take, and speaks up early if the plan changes. So the drive can just be a drive.</p><a class="btn" href="#planner">Plan my trip</a><a class="btn o" href="#try">Will I make it?</a></div>
+<div class="scene"><svg viewBox="0 0 520 380" role="img" aria-label="Illustration of an electric car driving toward a charging station at sunrise">
+<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--s1)"/><stop offset="1" style="stop-color:var(--s2)"/></linearGradient></defs>
+<rect width="520" height="380" fill="url(#sk)"/><circle cx="400" cy="120" r="46" fill="var(--y)"/>
+<path d="M0 250 Q110 160 230 235 T520 215 V380 H0Z" fill="var(--h1)"/><path d="M0 290 Q160 220 300 280 T520 265 V380 H0Z" fill="var(--h2)"/>
+<path d="M-10 330 Q250 290 530 332" fill="none" stroke="var(--ink)" stroke-width="34" opacity=".88"/><path d="M-10 330 Q250 290 530 332" fill="none" stroke="var(--c)" stroke-width="3" stroke-dasharray="16 14"/>
+<g transform="translate(398 238)"><rect width="38" height="70" rx="8" fill="var(--c)" stroke="var(--ink)" stroke-width="3"/><path d="M22 14 L12 38 H20 L16 58 L28 30 H20Z" fill="var(--y)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/></g>
+<g class="car"><g transform="translate(150 292)"><path d="M0 34 V20 Q2 12 14 10 L30 -6 Q36 -10 46 -10 H72 Q82 -10 88 -2 L100 10 Q112 12 112 22 V34Z" fill="var(--t)"/><path d="M36 -2 L48 -2 V10 H28Z M54 -2 H72 L84 10 H54Z" fill="var(--c)" opacity=".9"/><circle cx="26" cy="36" r="12" fill="var(--ink)"/><circle cx="26" cy="36" r="5" fill="var(--c)"/><circle cx="88" cy="36" r="12" fill="var(--ink)"/><circle cx="88" cy="36" r="5" fill="var(--c)"/></g></g>
+<g class="bub" style="transform-origin:330px 200px"><rect x="262" y="150" width="190" height="52" rx="16" fill="var(--c)" stroke="var(--l)"/><path d="M380 202 L392 226 L400 202Z" fill="var(--c)" stroke="var(--l)"/><text x="278" y="172" style="fill:var(--ink);font-weight:700;font-size:14px">Charge to 70% here.</text><text x="278" y="190" style="font-size:13px">About 25 min. Plenty to spare.</text></g></svg></div></div></div>
+
+<div class="w"><section id="try"><h2>Will I make it? Let's check together.</h2><p class="lead">Drag the sliders. This is a simple illustration for a car with 250 km of real-world range, but it's the same question the planner answers properly.</p>
+<div class="try"><div><label>How far are you going? <b id="v1"></b></label><input type="range" id="d" min="100" max="800" step="10" value="480">
+<label>How full is the battery? <b id="v2"></b></label><input type="range" id="s" min="20" max="100" step="5" value="80"></div>
+<div class="say" aria-live="polite"><strong id="h"></strong><span id="r"></span><svg id="bar" viewBox="0 0 400 60" role="img" aria-label="Trip with stops"></svg></div></div></section>
+
+<section id="story" style="padding-top:20px"><div class="story"><div><h2>A Saturday drive, made calmer</h2><p class="lead">An example of how a typical trip could feel: Priya is driving from Pune to Hyderabad to see her grandmother, about 560 km away, starting at 90%.</p><a class="btn o" href="#planner">Plan one like it</a></div>
+<div class="tl"><div><small>The night before</small><h3>She compares three routes</h3><p>The scenic one is prettier, but the balanced route saves 25 minutes and keeps a safer battery margin. She picks it.</p></div>
+<div><small>Saturday, 7:40</small><h3>Three short stops, chosen for her</h3><p>The planner suggests three fast chargers just off the highway, each with free ports right now and a chai stall close by.</p></div>
+<div><small>Mid-drive</small><h3>A gentle heads-up</h3><p>Twenty kilometres before the stop, a notice says the charger is still free. If it fills up, she'll hear about it before she arrives.</p></div>
+<div><small>Arrival</small><h3>Reached Hyderabad with 18% to spare</h3><p>Charging cost about ₹550 in total. No numbers to juggle, just a visit and a hug.</p></div></div></div></section>
+
+<section><h2>The worries we planned around</h2><div class="worry">
+<div><h3>"What if I run out?"</h3><p>You set a safety reserve. ChargePath never plans below it, and warns you the moment something puts it at risk.</p><p>Range-risk alerts</p></div>
+<div><h3>"What if the charger is busy?"</h3><p>You see free ports and status before you commit, and the plan accounts for likely waits.</p><p>Live availability</p></div>
+<div><h3>"Will my plug even fit?"</h3><p>Most Indian EVs fast-charge on CCS2. Stops only come from chargers that match your car's connector and speed.</p><p>Compatible chargers only</p></div></div></section>
+
+<section id="can"><h2>Everything you'd ask a very organized friend to do</h2><ul class="can">
+<li><b>Remember your car</b><span>Battery size, consumption, connector and health, saved for every trip.</span></li>
+<li><b>Compare your options</b><span>Three routes side by side on time, cost, stops and risk.</span></li>
+<li><b>Show it on a map</b><span>Your route, the stops, and every nearby charger with its status.</span></li>
+<li><b>Respect your style</b><span>Fastest, cheapest or balanced. Your reserve, your preferred networks.</span></li>
+<li><b>Keep your history</b><span>Saved plans, past trips, and a look at what you've spent and driven.</span></li>
+<li><b>Warn you kindly, and early</b><span>Low battery, risky stretches and charger changes, before they matter.</span></li></ul></section>
+
+<section><h2>Made with Indian roads in mind</h2><p class="lead">Planning a drive on the Hyderabad to Bengaluru highway is not the same as planning one anywhere else.</p><ul class="can"><li><b>Prices in rupees</b><span>See what each stop and the whole trip cost, in ₹.</span></li><li><b>Cars you actually see here</b><span>Start from approximate profiles for the Tiago, Punch, Nexon, XUV400 and ZS EV.</span></li><li><b>Heat, rain and a full car</b><span>Choose summer A/C, heavy rain or a full load, and range estimates adjust.</span></li><li><b>Highway corridors first</b><span>The demo network covers Pune, Hyderabad, Bengaluru, Chennai, Vijayawada and more.</span></li></ul></section><div class="dk"><h2>And for the people who keep chargers running</h2><p>Station operators can manage their network in the same place, so what drivers see is as fresh as it can be.</p><ul><li>Edit power, ports, prices and status</li><li>Add or remove stations</li><li>See how busy the network is</li><li>Connect live feeds when you're ready</li></ul></div>
+
+<section><h2>Good questions</h2>
+<details><summary>Is this using real chargers?</summary><p>Not yet. Today it runs on a simulated charging network placed along real South Indian highway corridors, so you can explore safely. Real Indian charger networks and live status can plug in through the data adapter.</p></details>
+<details><summary>Does it work with my car?</summary><p>Popular Indian EVs come pre-loaded with approximate figures. For any other car, add its battery size, consumption, max charging power and connector once and it's saved.</p></details>
+<details><summary>Where are my trips stored?</summary><p>In your browser, on your device. An account version could sync them everywhere.</p></details>
+<details><summary>How does it pick stops?</summary><p>It looks at chargers you can safely reach, then balances progress, detour, waiting, speed and price against what you told it matters most.</p></details></section>
+
+<section id="planner" style="padding-top:20px"><h2>Plan a real-feeling trip right here</h2><p class="lead">Pick a car, choose two South Indian cities, set your battery level and compare three routes with charging stops, times and costs in ₹. Everything below runs in your browser on a simulated charging network.</p><iframe class="pl" title="ChargePath trip planner" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;&lt;title&gt;ChargePath – EV Journey Planner&lt;/title&gt;
+&lt;style&gt;
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef2ee;--c:#fff;--ink:#12201a;--m:#58685e;--l:#d8e0d9;--a:#0b7f58;--as:#e3f3ea;--w:#b86e00;--b:#bf3a2b;--g:#1c9a5e;--mp:#f7faf6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1310;--c:#151d18;--ink:#e6eee8;--m:#97a79d;--l:#26332b;--a:#3fcf94;--as:#16301f;--w:#e9a23b;--b:#ef6b5b;--g:#43d08a;--mp:#101813}}
+:root[data-theme=dark]{--bg:#0d1310;--c:#151d18;--ink:#e6eee8;--m:#97a79d;--l:#26332b;--a:#3fcf94;--as:#16301f;--w:#e9a23b;--b:#ef6b5b;--g:#43d08a;--mp:#101813}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 &quot;Segoe UI&quot;,system-ui,sans-serif;background-color:var(--bg)}
+header{padding:14px 16px 0;max-width:1180px;margin:auto}h1{font-size:22px;margin:0;letter-spacing:-.02em}h1 small{font-weight:400;color:var(--m);font-size:13px;margin-left:8px}
+nav{display:flex;gap:4px;overflow-x:auto;margin-top:10px;border-bottom:1px solid var(--l)}nav button{background:none;border:0;border-bottom:3px solid transparent;padding:8px 12px;color:var(--m);font:inherit;cursor:pointer;white-space:nowrap}nav button.on{color:var(--a);border-color:var(--a);font-weight:600}
+main{max-width:1180px;margin:auto;padding:12px 16px 40px}.g{display:grid;grid-template-columns:300px 1fr;gap:12px}@media(max-width:860px){.g{grid-template-columns:1fr}}
+.c{background:var(--c);border:1px solid var(--l);border-radius:10px;padding:12px;margin-bottom:12px}h2{font-size:15px;margin:0 0 8px}label{display:block;font-size:12.5px;color:var(--m);margin:8px 0 2px}
+input,select,button.b{font:inherit;color:var(--ink);background:var(--c);border:1px solid var(--l);border-radius:6px;padding:6px 8px;width:100%}input[type=range]{padding:0;accent-color:var(--a)}
+button.b{width:auto;cursor:pointer;background:var(--a);color:#fff;border:0;font-weight:600;margin:6px 6px 0 0}button.b.o{background:none;color:var(--a);border:1px solid var(--a)}button.b.x{background:none;color:var(--b);border:1px solid var(--b);padding:2px 8px}
+.r3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.rt{cursor:pointer;border:2px solid var(--l);border-radius:10px;padding:10px;background:var(--c)}.rt.on{border-color:var(--a);background:var(--as)}
+.bd{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:99px;background:var(--a);color:#fff;margin-left:6px}.k{display:flex;justify-content:space-between;font-size:13px;padding:2px 0;border-bottom:1px dotted var(--l)}.k b{font-weight:600}
+.al{padding:7px 10px;border-radius:6px;margin:4px 0;font-size:13.5px;border-left:4px solid}.al.ok{background:var(--as);border-color:var(--g)}.al.warn{border-color:var(--w);background:color-mix(in srgb,var(--w) 14%,var(--c))}.al.bad{border-color:var(--b);background:color-mix(in srgb,var(--b) 14%,var(--c))}
+svg{width:100%;height:auto;display:block;background:var(--mp);border-radius:8px;border:1px solid var(--l)}svg text{fill:var(--m);font-size:11px}
+.tl{border-left:3px solid var(--a);margin-left:6px;padding-left:12px}.tl&gt;div{margin-bottom:10px}.m{color:var(--m);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:4px 6px;border-bottom:1px solid var(--l);text-align:left}td input,td select{padding:2px 4px;width:80px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}.kp div{background:var(--as);border-radius:8px;padding:8px}.kp b{display:block;font-size:20px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:120px}.bars i{flex:1;background:var(--a);border-radius:3px 3px 0 0;min-width:10px;position:relative}.bars i span{position:absolute;top:-16px;left:0;font-size:10px;font-style:normal;color:var(--m)}
+.bat{height:14px;background:var(--l);border-radius:7px;overflow:hidden}.bat i{display:block;height:100%;background:var(--g)}.lg{height:110px;overflow:auto;font-size:12.5px}
+[hidden]{display:none!important}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;&lt;h1&gt;ChargePath&lt;small&gt;EV journey planner · simulated South India network&lt;/small&gt;&lt;/h1&gt;
+&lt;nav id=&quot;nav&quot;&gt;&lt;/nav&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;section id=&quot;t-plan&quot; class=&quot;g&quot;&gt;
+&lt;div&gt;&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Trip setup&lt;/h2&gt;
+&lt;label&gt;Vehicle&lt;/label&gt;&lt;select id=&quot;vi&quot;&gt;&lt;/select&gt;
+&lt;label&gt;From&lt;/label&gt;&lt;select id=&quot;src&quot;&gt;&lt;/select&gt;&lt;label&gt;To&lt;/label&gt;&lt;select id=&quot;dst&quot;&gt;&lt;/select&gt;
+&lt;label&gt;Current charge: &lt;b id=&quot;l-soc&quot;&gt;&lt;/b&gt;%&lt;/label&gt;&lt;input type=&quot;range&quot; id=&quot;soc&quot; min=&quot;5&quot; max=&quot;100&quot;&gt;
+&lt;label&gt;Keep at least &lt;b id=&quot;l-min&quot;&gt;&lt;/b&gt;% on arrival&lt;/label&gt;&lt;input type=&quot;range&quot; id=&quot;min&quot; min=&quot;0&quot; max=&quot;30&quot;&gt;
+&lt;label&gt;Charge up to &lt;b id=&quot;l-tgt&quot;&gt;&lt;/b&gt;% at stops&lt;/label&gt;&lt;input type=&quot;range&quot; id=&quot;tgt&quot; min=&quot;50&quot; max=&quot;100&quot;&gt;
+&lt;label&gt;Optimize for&lt;/label&gt;&lt;select id=&quot;pref&quot;&gt;&lt;option value=&quot;fast&quot;&gt;Fastest arrival&lt;/option&gt;&lt;option value=&quot;bal&quot;&gt;Balanced&lt;/option&gt;&lt;option value=&quot;cheap&quot;&gt;Lowest cost&lt;/option&gt;&lt;/select&gt;
+&lt;label&gt;Conditions&lt;/label&gt;&lt;select id=&quot;cond&quot;&gt;&lt;option value=&quot;1&quot;&gt;Pleasant&lt;/option&gt;&lt;option value=&quot;1.12&quot;&gt;Hot, A/C on&lt;/option&gt;&lt;option value=&quot;1.1&quot;&gt;Heavy rain&lt;/option&gt;&lt;option value=&quot;1.25&quot;&gt;Full load + A/C&lt;/option&gt;&lt;/select&gt;
+&lt;label&gt;Preferred network&lt;/label&gt;&lt;select id=&quot;net&quot;&gt;&lt;option value=&quot;any&quot;&gt;Any&lt;/option&gt;&lt;option&gt;VoltGrid&lt;/option&gt;&lt;option&gt;ChargeNet&lt;/option&gt;&lt;option&gt;EcoPlug&lt;/option&gt;&lt;/select&gt;
+&lt;label&gt;Battery health: &lt;b id=&quot;l-soh&quot;&gt;&lt;/b&gt;%&lt;/label&gt;&lt;input type=&quot;range&quot; id=&quot;soh&quot; min=&quot;60&quot; max=&quot;100&quot;&gt;
+&lt;p class=&quot;m&quot; id=&quot;rng&quot;&gt;&lt;/p&gt;
+&lt;button class=&quot;b&quot; id=&quot;sim&quot;&gt;Simulate drive&lt;/button&gt;&lt;button class=&quot;b o&quot; id=&quot;save&quot;&gt;Save plan&lt;/button&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;live&quot; checked style=&quot;width:auto&quot;&gt; Live charger status (simulated feed)&lt;/label&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot; id=&quot;simp&quot; hidden&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;div class=&quot;c&quot;&gt;&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;&lt;div class=&quot;m&quot; style=&quot;margin-top:6px&quot;&gt;&lt;span class=&quot;dot&quot; style=&quot;background:var(--g)&quot;&gt;&lt;/span&gt;2+ free &lt;span class=&quot;dot&quot; style=&quot;background:var(--w)&quot;&gt;&lt;/span&gt;1 free &lt;span class=&quot;dot&quot; style=&quot;background:var(--b)&quot;&gt;&lt;/span&gt;busy &lt;span class=&quot;dot&quot; style=&quot;background:#888&quot;&gt;&lt;/span&gt;offline · large rings = near selected route&lt;/div&gt;&lt;/div&gt;
+&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section id=&quot;t-veh&quot; hidden&gt;&lt;/section&gt;&lt;section id=&quot;t-trips&quot; hidden&gt;&lt;/section&gt;&lt;section id=&quot;t-an&quot; hidden&gt;&lt;/section&gt;&lt;section id=&quot;t-adm&quot; hidden&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;script&gt;
+const $=s=&gt;document.querySelector(s),f1=n=&gt;(+n).toFixed(1),f0=n=&gt;Math.round(n),T=m=&gt;{m=Math.round(m);return Math.floor(m/60)+&#x27;h &#x27;+String(m%60).padStart(2,&#x27;0&#x27;)+&#x27;m&#x27;};
+const ls={g(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const cities=[[&#x27;Pune&#x27;,100,78],[&#x27;Solapur&#x27;,317,174],[&#x27;Hubballi&#x27;,233,429],[&#x27;Hyderabad&#x27;,590,205],[&#x27;Kurnool&#x27;,543,377],[&#x27;Vijayawada&#x27;,820,301],[&#x27;Anantapur&#x27;,496,505],[&#x27;Bengaluru&#x27;,495,694],[&#x27;Tirupati&#x27;,689,621],[&#x27;Chennai&#x27;,779,682]].map(([n,x,y])=&gt;({n,x,y}));
+const near=(x,y)=&gt;cities.reduce((a,c)=&gt;Math.hypot(c.x-x,c.y-y)&lt;Math.hypot(a.x-x,a.y-y)?c:a);
+function rng(s){return()=&gt;{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s&gt;&gt;&gt;15,1|s);t=t+Math.imul(t^t&gt;&gt;&gt;7,61|t)^t;return((t^t&gt;&gt;&gt;14)&gt;&gt;&gt;0)/4294967296}}
+function gen(){const r=rng(11),N=[&#x27;VoltGrid&#x27;,&#x27;ChargeNet&#x27;,&#x27;EcoPlug&#x27;];let o=[],i=0;for(let a=0;a&lt;cities.length;a++)for(let b=a+1;b&lt;cities.length;b++){const A=cities[a],B=cities[b],L=Math.hypot(B.x-A.x,B.y-A.y);if(L&gt;520)continue;const n=Math.max(1,Math.floor(L/110));for(let k=1;k&lt;=n;k++){const t=k/(n+1),x=A.x+(B.x-A.x)*t+(r()-.5)*16,y=A.y+(B.y-A.y)*t+(r()-.5)*16,p=2+Math.floor(r()*7);i++;o.push({id:i,name:near(x,y).n+&#x27; &#x27;+N[i%3]+&#x27; &#x27;+i,x,y,net:N[i%3],kw:[30,60,60,120,150][Math.floor(r()*5)],ports:p,free:Math.floor(r()*(p+1)),price:+(12+r()*10).toFixed(1),conn:[&#x27;CCS2&#x27;],st:r()&lt;.06?&#x27;offline&#x27;:&#x27;online&#x27;})}}return o}
+const V0=[{n:&#x27;Tata Tiago EV&#x27;,cap:24,eff:120,kw:25,cn:&#x27;CCS2&#x27;},{n:&#x27;Tata Punch EV&#x27;,cap:35,eff:140,kw:50,cn:&#x27;CCS2&#x27;},{n:&#x27;Tata Nexon EV&#x27;,cap:40.5,eff:150,kw:60,cn:&#x27;CCS2&#x27;},{n:&#x27;Mahindra XUV400&#x27;,cap:39.4,eff:150,kw:50,cn:&#x27;CCS2&#x27;},{n:&#x27;MG ZS EV&#x27;,cap:50.3,eff:160,kw:75,cn:&#x27;CCS2&#x27;}];
+const SEED=[{id:1,d:&#x27;2026-09-12&#x27;,from:&#x27;Pune&#x27;,to:&#x27;Hyderabad&#x27;,veh:&#x27;Tata Nexon EV&#x27;,route:&#x27;Fastest highway&#x27;,dist:612,min:575,kwh:101,cost:1820,stops:2,minSoc:14,status:&#x27;completed&#x27;,sample:1},{id:2,d:&#x27;2026-09-20&#x27;,from:&#x27;Hyderabad&#x27;,to:&#x27;Bengaluru&#x27;,veh:&#x27;MG ZS EV&#x27;,route:&#x27;Balanced&#x27;,dist:560,min:455,kwh:96,cost:1710,stops:2,minSoc:12,status:&#x27;completed&#x27;,sample:1},{id:3,d:&#x27;2026-09-28&#x27;,from:&#x27;Bengaluru&#x27;,to:&#x27;Chennai&#x27;,veh:&#x27;Tata Punch EV&#x27;,route:&#x27;Eco scenic&#x27;,dist:372,min:340,kwh:52,cost:930,stops:1,minSoc:15,status:&#x27;completed&#x27;,sample:1}];
+let VS=ls.g(&#x27;cp_v2&#x27;,V0),ST=ls.g(&#x27;cp_st2&#x27;,null)||gen(),TR=ls.g(&#x27;cp_t2&#x27;,SEED),
+S=Object.assign({vi:2,src:3,dst:7,soc:80,min:10,tgt:80,pref:&#x27;bal&#x27;,cond:1,net:&#x27;any&#x27;,soh:100,sel:0,tab:&#x27;plan&#x27;},ls.g(&#x27;cp_s2&#x27;,{})),R=[],sim=null;
+if(S.vi&gt;=VS.length)S.vi=0;
+const veh=()=&gt;VS[S.vi];
+// Data-provider adapter: swap this object for OCPI / OCPP / Open Charge Map / OEM telematics integrations.
+const Provider={name:&#x27;Simulated feed&#x27;,tick(a){a.forEach(s=&gt;{if(s.st==&#x27;online&#x27;&amp;&amp;Math.random()&lt;.3)s.free=Math.max(0,Math.min(s.ports,s.free+(Math.random()&lt;.5?-1:1)))})}};
+const W={fast:{t:1.2,c:0,m:.008},bal:{t:1,c:.035,m:.035},cheap:{t:.6,c:.11,m:.1}};
+
+function plan(o){
+ const v=veh(),cap=v.cap*S.soh/100,w=W[S.pref],segs=[];let acc=0;
+ for(let i=0;i&lt;2;i++){const a=o.pts[i],b=o.pts[i+1],l=Math.hypot(b.x-a.x,b.y-a.y);segs.push({a,b,l,s:acc});acc+=l}
+ o.geo=acc;o.dist=acc*o.f;const cons=v.eff/1000*(.7+.3*(o.sp/70)**2)*S.cond;o.cons=cons;
+ const on=[];ST.forEach(st=&gt;{let be=null;segs.forEach(sg=&gt;{const t=Math.max(0,Math.min(1,((st.x-sg.a.x)*(sg.b.x-sg.a.x)+(st.y-sg.a.y)*(sg.b.y-sg.a.y))/(sg.l*sg.l))),dd=Math.hypot(st.x-(sg.a.x+t*(sg.b.x-sg.a.x)),st.y-(sg.a.y+t*(sg.b.y-sg.a.y)));if(!be||dd&lt;be.dd)be={dd,pos:(sg.s+t*sg.l)*o.f}});if(be.dd&lt;=22){st._on=st._on||{};st._on[o.k]=1;if(st.st==&#x27;online&#x27;&amp;&amp;st.conn.includes(v.cn)&amp;&amp;(S.net==&#x27;any&#x27;||st.net==S.net))on.push({st,off:be.dd,pos:be.pos})}});
+ on.sort((a,b)=&gt;a.pos-b.pos);
+ let pos=0,e=cap*S.soc/100,res=cap*S.min/100,stops=[],tt=0,cost=0,ok=true,minS=S.soc,al=[];
+ const ct=(a,b,P)=&gt;{const lim=.8*cap;let h=0;if(a&lt;lim)h+=(Math.min(b,lim)-a)/(P*.85);if(b&gt;lim)h+=(b-Math.max(a,lim))/(P*.35);return h*60};
+ const wait=s=&gt;s.free==0?15:s.free==1?4:0;
+ for(let g=0;g&lt;20;g++){
+  const reach=(e-res)/cons;if(pos+reach&gt;=o.dist)break;
+  const cs=on.filter(x=&gt;x.pos&gt;pos+5&amp;&amp;x.pos&lt;=pos+reach);
+  if(!cs.length){ok=false;al.push({t:&#x27;bad&#x27;,m:`No compatible charger within range after ${f0(pos)} km. Raise starting charge, lower the arrival reserve, change network, or pick another route.`});break}
+  const rr=(cap*S.tgt/100-res)/cons,fz=cs.filter(x=&gt;o.dist-x.pos&lt;=rr||on.some(y=&gt;y.pos&gt;x.pos+5&amp;&amp;y.pos-x.pos&lt;=rr)),pool=fz.length?fz:cs;let best=null,bs=-1e9;pool.forEach(x=&gt;{const P=Math.min(x.st.kw,v.kw),sc=(x.pos-pos)-w.t*(x.off*2.4+wait(x.st)+25/(P*.8)*60)-w.c*x.st.price*25;if(sc&gt;bs){bs=sc;best=x}});
+  const x=best,ea=e-(x.pos-pos)*cons,need=(o.dist-x.pos)*cons+res,lim=cap*S.tgt/100;let to=need*1.04&lt;=lim?need*1.04:lim;if(to&lt;ea+1)to=Math.min(cap*.95,ea+1);
+  const P=Math.min(x.st.kw,v.kw),ch=ct(ea,to,P),wt=wait(x.st),det=x.off*2.4,c=(to-ea)*x.st.price;
+  stops.push({st:x.st,pos:x.pos,off:x.off,arr:ea/cap*100,dep:to/cap*100,kwh:to-ea,P,ch,wt,det,cost:c,to});
+  tt+=ch+wt+det;cost+=c;minS=Math.min(minS,ea/cap*100);
+  if(ea/cap*100&lt;10)al.push({t:&#x27;warn&#x27;,m:`Low arrival charge (${f0(ea/cap*100)}%) at ${x.st.name}. Consider a larger buffer.`});
+  if(x.st.free==0)al.push({t:&#x27;warn&#x27;,m:`${x.st.name} shows no free ports now. Expect a queue of about 15 min.`});
+  e=to;pos=x.pos}
+ const fin=(e-(o.dist-pos)*cons)/cap*100;if(ok){minS=Math.min(minS,fin);if(fin&lt;S.min)al.push({t:&#x27;warn&#x27;,m:&#x27;Arrival charge falls below your reserve.&#x27;})}
+ const drive=o.dist/o.sp*60;Object.assign(o,{stops,ok,al,drive,chg:tt,total:drive+tt,kwh:o.dist*cons,cost,minS:ok?minS:0,fin,cap});
+ const risk=!ok?&#x27;High&#x27;:minS&lt;8?&#x27;High&#x27;:minS&lt;15?&#x27;Medium&#x27;:&#x27;Low&#x27;;o.risk=risk;
+ o.score=o.total+cost*w.m+stops.length*6+(!ok?1e5:0)+(risk==&#x27;High&#x27;?80:risk==&#x27;Medium&#x27;?20:0);return o}
+function routes(){ST.forEach(s=&gt;s._on=null);const a=cities[S.src],b=cities[S.dst];if(a==b)return[];const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy),nx=-dy/d,ny=dx/d;
+ const rs=[[&#x27;Fastest highway&#x27;,0,1.08,88],[&#x27;Balanced&#x27;,.16,1.14,75],[&#x27;Eco scenic&#x27;,-.16,1.2,62]].map(([n,o,f,sp],k)=&gt;plan({name:n,k,f,sp,pts:[a,{x:(a.x+b.x)/2+nx*o*d,y:(a.y+b.y)/2+ny*o*d},b]}));
+ const bi=rs.reduce((m,r,i)=&gt;r.score&lt;rs[m].score?i:m,0);rs.forEach((r,i)=&gt;r.best=i==bi);return rs}
+const ptAt=(o,g)=&gt;{const [a,m,b]=o.pts,l1=Math.hypot(m.x-a.x,m.y-a.y);if(g&lt;=l1){const t=g/l1;return{x:a.x+t*(m.x-a.x),y:a.y+t*(m.y-a.y)}}const l2=o.geo-l1,t=Math.min(1,(g-l1)/l2);return{x:m.x+t*(b.x-m.x),y:m.y+t*(b.y-m.y)}};
+const col=s=&gt;s.st!=&#x27;online&#x27;?&#x27;#888&#x27;:s.free&gt;1?&#x27;var(--g)&#x27;:s.free==1?&#x27;var(--w)&#x27;:&#x27;var(--b)&#x27;;
+
+function drawMap(){
+ let h=&#x27;&lt;svg viewBox=&quot;0 0 860 740&quot; role=&quot;img&quot; aria-label=&quot;Route map&quot;&gt;&#x27;;
+ R.forEach((o,i)=&gt;{if(i!=S.sel)h+=`&lt;polyline points=&quot;${o.pts.map(p=&gt;p.x+&#x27;,&#x27;+p.y)}&quot; fill=&quot;none&quot; stroke=&quot;var(--m)&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;6 5&quot; opacity=&quot;.5&quot;/&gt;`});
+ const o=R[S.sel];if(o)h+=`&lt;polyline points=&quot;${o.pts.map(p=&gt;p.x+&#x27;,&#x27;+p.y)}&quot; fill=&quot;none&quot; stroke=&quot;var(--a)&quot; stroke-width=&quot;4.5&quot; stroke-linejoin=&quot;round&quot;/&gt;`;
+ ST.forEach(s=&gt;{const n=o&amp;&amp;s._on&amp;&amp;s._on[o.k];h+=`&lt;circle cx=&quot;${s.x}&quot; cy=&quot;${s.y}&quot; r=&quot;${n?6:3.5}&quot; fill=&quot;${col(s)}&quot; stroke=&quot;${n?&#x27;var(--ink)&#x27;:&#x27;none&#x27;}&quot; stroke-width=&quot;1.2&quot;&gt;&lt;title&gt;${s.name} · ${s.kw} kW · ${s.free}/${s.ports} free&lt;/title&gt;&lt;/circle&gt;`});
+ cities.forEach((c,i)=&gt;{h+=`&lt;rect x=&quot;${c.x-4}&quot; y=&quot;${c.y-4}&quot; width=&quot;8&quot; height=&quot;8&quot; fill=&quot;${i==S.src||i==S.dst?&#x27;var(--a)&#x27;:&#x27;var(--ink)&#x27;}&quot;/&gt;&lt;text x=&quot;${c.x&gt;740?c.x-7:c.x+7}&quot; y=&quot;${c.y-6}&quot; text-anchor=&quot;${c.x&gt;740?&#x27;end&#x27;:&#x27;start&#x27;}&quot;&gt;${c.n}&lt;/text&gt;`});
+ if(o)o.stops.forEach((s,i)=&gt;{h+=`&lt;circle cx=&quot;${s.st.x}&quot; cy=&quot;${s.st.y}&quot; r=&quot;10&quot; fill=&quot;var(--a)&quot; stroke=&quot;#fff&quot; stroke-width=&quot;2&quot;/&gt;&lt;text x=&quot;${s.st.x}&quot; y=&quot;${s.st.y+4}&quot; text-anchor=&quot;middle&quot; style=&quot;fill:#fff;font-weight:700&quot;&gt;${i+1}&lt;/text&gt;`});
+ if(sim&amp;&amp;o){const p=ptAt(o,sim.pos/o.f);h+=`&lt;circle cx=&quot;${p.x}&quot; cy=&quot;${p.y}&quot; r=&quot;8&quot; fill=&quot;#2f6fed&quot; stroke=&quot;#fff&quot; stroke-width=&quot;2.5&quot;/&gt;`}
+ $(&#x27;#map&#x27;).innerHTML=h+&#x27;&lt;/svg&gt;&#x27;}
+
+function upd(){
+ if(sim)stopSim();
+ R=routes();if(S.sel&gt;=R.length)S.sel=0;const v=veh(),cap=v.cap*S.soh/100,c70=v.eff/1000*S.cond;
+ $(&#x27;#rng&#x27;).innerHTML=`Estimated range at 70 km/h: &lt;b&gt;${f0(cap*S.soc/100/c70)} km&lt;/b&gt; (${f0(cap*Math.max(0,S.soc-S.min)/100/c70)} km above your reserve). Full charge: ${f0(cap/c70)} km. Usable battery ${f1(cap)} kWh.`;
+ [&#x27;soc&#x27;,&#x27;min&#x27;,&#x27;tgt&#x27;,&#x27;soh&#x27;].forEach(k=&gt;$(&#x27;#l-&#x27;+k).textContent=S[k]);
+ const h=R.length?R.map((o,i)=&gt;`&lt;div class=&quot;rt ${i==S.sel?&#x27;on&#x27;:&#x27;&#x27;}&quot; data-i=&quot;${i}&quot;&gt;&lt;b&gt;${o.name}&lt;/b&gt;${o.best?&#x27;&lt;span class=&quot;bd&quot;&gt;Recommended&lt;/span&gt;&#x27;:&#x27;&#x27;}
+ &lt;div class=&quot;k&quot;&gt;&lt;span&gt;Distance&lt;/span&gt;&lt;b&gt;${f0(o.dist)} km&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Driving&lt;/span&gt;&lt;b&gt;${T(o.drive)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Charging + waits&lt;/span&gt;&lt;b&gt;${T(o.chg)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Total time&lt;/span&gt;&lt;b&gt;${o.ok?T(o.total):&#x27;Not reachable&#x27;}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Stops&lt;/span&gt;&lt;b&gt;${o.stops.length}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Energy / cost&lt;/span&gt;&lt;b&gt;${f0(o.kwh)} kWh · ₹${f0(o.cost)}&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Lowest charge&lt;/span&gt;&lt;b&gt;${f0(o.minS)}%&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;k&quot;&gt;&lt;span&gt;Range risk&lt;/span&gt;&lt;b style=&quot;color:var(--${o.risk==&#x27;Low&#x27;?&#x27;g&#x27;:o.risk==&#x27;Medium&#x27;?&#x27;w&#x27;:&#x27;b&#x27;})&quot;&gt;${o.risk}&lt;/b&gt;&lt;/div&gt;&lt;/div&gt;`).join(&#x27;&#x27;):&#x27;&lt;p class=&quot;m&quot;&gt;Choose different start and end cities.&lt;/p&gt;&#x27;;
+ const o=R[S.sel];let d=&#x27;&#x27;;
+ if(o){const bs=R.find(r=&gt;r.best),fs=R[0];
+  d=`&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Optimizer insight&lt;/h2&gt;&lt;p style=&quot;margin:0&quot;&gt;${bs.name} scores best for “${$(&#x27;#pref&#x27;).selectedOptions[0].text}”: ${bs.ok?T(bs.total)+&#x27; door to door&#x27;:&#x27;the only route with gaps&#x27;}, ${bs.stops.length} stop${bs.stops.length==1?&#x27;&#x27;:&#x27;s&#x27;}, ₹${f0(bs.cost)} charging${bs!=fs&amp;&amp;fs.ok&amp;&amp;bs.ok?`. The fastest highway is ${T(Math.abs(fs.total-bs.total))} ${fs.total&lt;bs.total?&#x27;quicker&#x27;:&#x27;slower&#x27;} but trades off cost, stops or range margin`:&#x27;&#x27;}.&lt;/p&gt;&lt;/div&gt;
+  &lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Alerts&lt;/h2&gt;${(o.al.length?o.al:[{t:&#x27;ok&#x27;,m:&#x27;No range risks detected on this route.&#x27;}]).map(a=&gt;`&lt;div class=&quot;al ${a.t}&quot;&gt;${a.m}&lt;/div&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;
+  &lt;div class=&quot;c&quot;&gt;&lt;h2&gt;${o.name}: itinerary&lt;/h2&gt;&lt;div class=&quot;tl&quot;&gt;&lt;div&gt;&lt;b&gt;${cities[S.src].n}&lt;/b&gt;&lt;div class=&quot;m&quot;&gt;Start at ${S.soc}% · ${f0(S.soc*o.cap/100)} kWh&lt;/div&gt;&lt;/div&gt;
+  ${o.stops.map((s,i)=&gt;`&lt;div&gt;&lt;b&gt;Stop ${i+1}: ${s.st.name}&lt;/b&gt; &lt;span class=&quot;m&quot;&gt;km ${f0(s.pos)} · ${s.off&gt;1?f1(s.off)+&#x27; km detour&#x27;:&#x27;on route&#x27;}&lt;/span&gt;&lt;div class=&quot;m&quot;&gt;Arrive ${f0(s.arr)}% → charge to ${f0(s.dep)}% (+${f1(s.kwh)} kWh at ~${f0(s.P)} kW) · ${T(s.ch)}${s.wt?` + ${s.wt} min wait`:&#x27;&#x27;} · ₹${f0(s.cost)} · ${s.st.free}/${s.st.ports} ports free · ${s.st.net}&lt;/div&gt;&lt;/div&gt;`).join(&#x27;&#x27;)}
+  &lt;div&gt;&lt;b&gt;${cities[S.dst].n}&lt;/b&gt;&lt;div class=&quot;m&quot;&gt;${o.ok?&#x27;Arrive with &#x27;+f0(o.fin)+&#x27;%&#x27;:&#x27;Destination not reachable with current settings&#x27;}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;`}
+ $(&#x27;#out&#x27;).innerHTML=`&lt;div class=&quot;r3&quot; style=&quot;margin-bottom:12px&quot;&gt;${h}&lt;/div&gt;`+d;drawMap();ls.s(&#x27;cp_s2&#x27;,S)}
+
+// simulation
+function log(m,t){sim.log.unshift(`&lt;div class=&quot;al ${t||&#x27;ok&#x27;}&quot;&gt;${m}&lt;/div&gt;`)}
+function drawSim(){const o=R[S.sel],p=$(&#x27;#simp&#x27;);p.hidden=!sim;if(!sim)return;const soc=sim.e/o.cap*100;
+ p.innerHTML=`&lt;h2&gt;Live drive&lt;/h2&gt;&lt;div class=&quot;bat&quot;&gt;&lt;i style=&quot;width:${Math.max(0,soc)}%;background:var(--${soc&lt;15?&#x27;b&#x27;:soc&lt;30?&#x27;w&#x27;:&#x27;g&#x27;})&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;${f0(soc)}% · ${f0(sim.pos)} / ${f0(o.dist)} km · ${sim.chg?&#x27;charging…&#x27;:&#x27;driving&#x27;}&lt;/div&gt;&lt;div class=&quot;lg&quot;&gt;${sim.log.join(&#x27;&#x27;)}&lt;/div&gt;`}
+function stopSim(){clearInterval(sim.t);sim=null;$(&#x27;#sim&#x27;).textContent=&#x27;Simulate drive&#x27;;drawSim()}
+function startSim(){const o=R[S.sel];if(!o)return;sim={pos:0,e:o.cap*S.soc/100,i:0,log:[],chg:0,w:{},t:setInterval(step,60)};$(&#x27;#sim&#x27;).textContent=&#x27;Stop simulation&#x27;;log(&#x27;Trip started on &#x27;+o.name)}
+function step(){const o=R[S.sel],n=o.stops[sim.i];
+ if(sim.chg){sim.e+=sim.cs;if(--sim.chg==0){log(&#x27;Charging complete. Back on the road.&#x27;)}drawSim();return}
+ const d=o.dist/220;sim.pos+=d;sim.e-=d*o.cons;const soc=sim.e/o.cap*100;
+ if(n&amp;&amp;!sim.w[&#x27;a&#x27;+sim.i]&amp;&amp;n.pos-sim.pos&lt;=25){sim.w[&#x27;a&#x27;+sim.i]=1;log(`Charging stop in 25 km: ${n.st.name} (${n.st.free}/${n.st.ports} ports free)`)}
+ if(soc&lt;15&amp;&amp;!sim.w.low){sim.w.low=1;log(`Low battery: ${f0(soc)}%`,&#x27;warn&#x27;)}
+ if(soc&lt;=0&amp;&amp;!sim.w.z){sim.w.z=1;log(&#x27;Range exhausted: plan not feasible&#x27;,&#x27;bad&#x27;)}
+ if(n&amp;&amp;sim.pos&gt;=n.pos){sim.pos=n.pos;sim.chg=20;sim.cs=(n.to-sim.e)/20;sim.i++;log(`Arrived at ${n.st.name} with ${f0(soc)}%. Charging to ${f0(n.dep)}%.`)}
+ if(sim.pos&gt;=o.dist){log(`Arrived at ${cities[S.dst].n} with ${f0(soc)}%`);addTrip(&#x27;completed&#x27;,o);const t=sim.t;clearInterval(t);sim.chg=0;sim.t=0;$(&#x27;#sim&#x27;).textContent=&#x27;Simulate drive&#x27;}
+ drawMap();drawSim()}
+function addTrip(status,o){TR.push({id:Date.now(),d:new Date().toISOString().slice(0,10),from:cities[S.src].n,to:cities[S.dst].n,veh:veh().n,route:o.name,dist:f0(o.dist),min:f0(o.total),kwh:f0(o.kwh),cost:+f1(o.cost),stops:o.stops.length,minSoc:f0(o.minS),status,S:{src:S.src,dst:S.dst,soc:S.soc,min:S.min,tgt:S.tgt,pref:S.pref,vi:S.vi}});ls.s(&#x27;cp_t2&#x27;,TR)}
+
+// other tabs
+function renderVeh(){$(&#x27;#t-veh&#x27;).innerHTML=`&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Vehicle profiles&lt;/h2&gt;&lt;p class=&quot;m&quot;&gt;Popular Indian EVs with approximate real-world figures. Edit or add your own to match your car.&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Battery kWh&lt;/th&gt;&lt;th&gt;Wh/km&lt;/th&gt;&lt;th&gt;DC kW&lt;/th&gt;&lt;th&gt;Port&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;${VS.map((v,i)=&gt;`&lt;tr&gt;&lt;td&gt;&lt;input type=&quot;radio&quot; name=&quot;av&quot; ${i==S.vi?&#x27;checked&#x27;:&#x27;&#x27;} onchange=&quot;S.vi=${i};fillV();upd()&quot; style=&quot;width:auto&quot;&gt;&lt;/td&gt;&lt;td&gt;${v.n}&lt;/td&gt;&lt;td&gt;${v.cap}&lt;/td&gt;&lt;td&gt;${v.eff}&lt;/td&gt;&lt;td&gt;${v.kw}&lt;/td&gt;&lt;td&gt;${v.cn}&lt;/td&gt;&lt;td&gt;${VS.length&gt;1?`&lt;button class=&quot;b x&quot; onclick=&quot;delV(${i})&quot;&gt;Remove&lt;/button&gt;`:&#x27;&#x27;}&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;)}&lt;/table&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Add vehicle&lt;/h2&gt;&lt;div class=&quot;r3&quot;&gt;&lt;div&gt;&lt;label&gt;Name&lt;/label&gt;&lt;input id=&quot;vn&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Battery (kWh)&lt;/label&gt;&lt;input id=&quot;vc&quot; type=&quot;number&quot; value=&quot;50&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Consumption (Wh/km)&lt;/label&gt;&lt;input id=&quot;ve&quot; type=&quot;number&quot; value=&quot;150&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Max DC power (kW)&lt;/label&gt;&lt;input id=&quot;vk&quot; type=&quot;number&quot; value=&quot;100&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Connector&lt;/label&gt;&lt;select id=&quot;vp&quot;&gt;&lt;option&gt;CCS2&lt;/option&gt;&lt;option&gt;CHAdeMO&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;b&quot; onclick=&quot;addV()&quot;&gt;Add vehicle&lt;/button&gt;&lt;/div&gt;`}
+function addV(){const n=$(&#x27;#vn&#x27;).value.trim();if(!n)return;VS.push({n,cap:+$(&#x27;#vc&#x27;).value||40,eff:+$(&#x27;#ve&#x27;).value||150,kw:+$(&#x27;#vk&#x27;).value||50,cn:$(&#x27;#vp&#x27;).value});ls.s(&#x27;cp_v2&#x27;,VS);fillV();renderVeh()}
+function delV(i){VS.splice(i,1);if(S.vi&gt;=VS.length)S.vi=0;ls.s(&#x27;cp_v2&#x27;,VS);fillV();renderVeh();upd()}
+function renderTrips(){$(&#x27;#t-trips&#x27;).innerHTML=`&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Saved plans and trip history&lt;/h2&gt;${TR.length?TR.slice().reverse().map(t=&gt;`&lt;div class=&quot;k&quot; style=&quot;padding:8px 0&quot;&gt;&lt;span&gt;&lt;b&gt;${t.from} → ${t.to}&lt;/b&gt; &lt;span class=&quot;m&quot;&gt;${t.d} · ${t.veh} · ${t.route}${t.sample?&#x27; · sample&#x27;:&#x27;&#x27;}&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;m&quot;&gt;${t.dist} km · ${T(t.min)} · ${t.kwh} kWh · ₹${t.cost} · ${t.stops} stop(s) · ${t.status}&lt;/span&gt;&lt;/span&gt;&lt;span&gt;${t.S?`&lt;button class=&quot;b o&quot; onclick=&quot;loadT(${t.id})&quot;&gt;Reload&lt;/button&gt;`:&#x27;&#x27;}&lt;button class=&quot;b x&quot; onclick=&quot;delT(${t.id})&quot;&gt;Delete&lt;/button&gt;&lt;/span&gt;&lt;/div&gt;`).join(&#x27;&#x27;):&#x27;&lt;p class=&quot;m&quot;&gt;No trips yet. Plan a route and choose Save plan.&lt;/p&gt;&#x27;}&lt;/div&gt;`}
+function loadT(id){const t=TR.find(x=&gt;x.id==id);Object.assign(S,t.S);fillV();go(&#x27;plan&#x27;);upd()}
+function delT(id){TR=TR.filter(x=&gt;x.id!=id);ls.s(&#x27;cp_t2&#x27;,TR);renderTrips()}
+function renderAn(){const n=TR.length,sum=k=&gt;TR.reduce((a,t)=&gt;a+t[k],0),km=sum(&#x27;dist&#x27;),by={};TR.forEach(t=&gt;by[t.route]=(by[t.route]||0)+1);const mx=Math.max(1,...TR.map(t=&gt;t.cost));
+ $(&#x27;#t-an&#x27;).innerHTML=`&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Charging and travel analytics&lt;/h2&gt;&lt;div class=&quot;kp&quot;&gt;&lt;div&gt;&lt;b&gt;${n}&lt;/b&gt;trips&lt;/div&gt;&lt;div&gt;&lt;b&gt;${f0(km)} km&lt;/b&gt;driven&lt;/div&gt;&lt;div&gt;&lt;b&gt;${f0(sum(&#x27;kwh&#x27;))} kWh&lt;/b&gt;energy&lt;/div&gt;&lt;div&gt;&lt;b&gt;₹${f0(sum(&#x27;cost&#x27;))}&lt;/b&gt;charging spend&lt;/div&gt;&lt;div&gt;&lt;b&gt;${n?f1(sum(&#x27;stops&#x27;)/n):0}&lt;/b&gt;stops per trip&lt;/div&gt;&lt;div&gt;&lt;b&gt;${km?f0(sum(&#x27;kwh&#x27;)*1000/km):0} Wh/km&lt;/b&gt;average use&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Charging cost per trip&lt;/h2&gt;&lt;div class=&quot;bars&quot;&gt;${TR.map(t=&gt;`&lt;i style=&quot;height:${t.cost/mx*100}%&quot;&gt;&lt;span&gt;₹${f0(t.cost)}&lt;/span&gt;&lt;/i&gt;`).join(&#x27;&#x27;)}&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Route types chosen&lt;/h2&gt;${Object.entries(by).map(([k,v])=&gt;`&lt;div class=&quot;k&quot;&gt;&lt;span&gt;${k}&lt;/span&gt;&lt;b&gt;${v}&lt;/b&gt;&lt;/div&gt;`).join(&#x27;&#x27;)||&#x27;&lt;p class=&quot;m&quot;&gt;No data.&lt;/p&gt;&#x27;}&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Report (CSV)&lt;/h2&gt;&lt;textarea readonly rows=&quot;6&quot; style=&quot;width:100%;font:12px monospace;background:var(--c);color:var(--ink);border:1px solid var(--l)&quot; onfocus=&quot;this.select()&quot;&gt;date,from,to,vehicle,route,km,min,kWh,cost,stops,min_soc,status\n${TR.map(t=&gt;[t.d,t.from,t.to,t.veh,t.route,t.dist,t.min,t.kwh,t.cost,t.stops,t.minSoc,t.status].join(&#x27;,&#x27;)).join(&#x27;\n&#x27;)}&lt;/textarea&gt;&lt;/div&gt;`}
+function renderAdm(){const on=ST.filter(s=&gt;s.st==&#x27;online&#x27;),pt=on.reduce((a,s)=&gt;a+s.ports,0),fr=on.reduce((a,s)=&gt;a+s.free,0);
+ $(&#x27;#t-adm&#x27;).innerHTML=`&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Network dashboard&lt;/h2&gt;&lt;div class=&quot;kp&quot;&gt;&lt;div&gt;&lt;b&gt;${ST.length}&lt;/b&gt;stations&lt;/div&gt;&lt;div&gt;&lt;b&gt;${ST.length-on.length}&lt;/b&gt;offline&lt;/div&gt;&lt;div&gt;&lt;b&gt;${pt}&lt;/b&gt;ports online&lt;/div&gt;&lt;div&gt;&lt;b&gt;${fr}&lt;/b&gt;ports free&lt;/div&gt;&lt;div&gt;&lt;b&gt;${pt?f0((pt-fr)/pt*100):0}%&lt;/b&gt;utilization&lt;/div&gt;&lt;/div&gt;&lt;p class=&quot;m&quot;&gt;Data source: ${Provider.name}. Replace the Provider adapter with OCPI, OCPP or Open Charge Map feeds for live data.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot; style=&quot;overflow-x:auto&quot;&gt;&lt;h2&gt;Charging stations&lt;/h2&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;kW&lt;/th&gt;&lt;th&gt;Ports&lt;/th&gt;&lt;th&gt;Free&lt;/th&gt;&lt;th&gt;₹/kWh&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;${ST.map(s=&gt;`&lt;tr&gt;&lt;td&gt;${s.name}&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; value=&quot;${s.kw}&quot; onchange=&quot;ed(${s.id},&#x27;kw&#x27;,+this.value)&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; value=&quot;${s.ports}&quot; onchange=&quot;ed(${s.id},&#x27;ports&#x27;,+this.value)&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; value=&quot;${s.free}&quot; onchange=&quot;ed(${s.id},&#x27;free&#x27;,+this.value)&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;number&quot; step=&quot;.5&quot; value=&quot;${s.price}&quot; onchange=&quot;ed(${s.id},&#x27;price&#x27;,+this.value)&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;select onchange=&quot;ed(${s.id},&#x27;st&#x27;,this.value)&quot;&gt;&lt;option ${s.st==&#x27;online&#x27;?&#x27;selected&#x27;:&#x27;&#x27;}&gt;online&lt;/option&gt;&lt;option ${s.st==&#x27;offline&#x27;?&#x27;selected&#x27;:&#x27;&#x27;}&gt;offline&lt;/option&gt;&lt;/select&gt;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;b x&quot; onclick=&quot;ST=ST.filter(x=&gt;x.id!=${s.id});sv()&quot;&gt;Delete&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;`).join(&#x27;&#x27;)}&lt;/table&gt;&lt;/div&gt;
+&lt;div class=&quot;c&quot;&gt;&lt;h2&gt;Add station&lt;/h2&gt;&lt;div class=&quot;r3&quot;&gt;&lt;div&gt;&lt;label&gt;Name&lt;/label&gt;&lt;input id=&quot;an&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Map x (0-860)&lt;/label&gt;&lt;input id=&quot;ax&quot; type=&quot;number&quot; value=&quot;430&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Map y (0-740)&lt;/label&gt;&lt;input id=&quot;ay&quot; type=&quot;number&quot; value=&quot;370&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Power kW&lt;/label&gt;&lt;input id=&quot;ak&quot; type=&quot;number&quot; value=&quot;120&quot;&gt;&lt;/div&gt;&lt;div&gt;&lt;label&gt;Ports&lt;/label&gt;&lt;input id=&quot;ap&quot; type=&quot;number&quot; value=&quot;4&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;button class=&quot;b&quot; onclick=&quot;addS()&quot;&gt;Add station&lt;/button&gt;&lt;/div&gt;`}
+function ed(id,k,v){const s=ST.find(x=&gt;x.id==id);s[k]=v;s.free=Math.min(s.free,s.ports);sv()}
+function sv(r){ls.s(&#x27;cp_st2&#x27;,ST);if(!r)renderAdm();upd()}
+function addS(){const n=$(&#x27;#an&#x27;).value.trim();if(!n)return;const p=+$(&#x27;#ap&#x27;).value||4;ST.push({id:Date.now(),name:n,x:+$(&#x27;#ax&#x27;).value,y:+$(&#x27;#ay&#x27;).value,net:&#x27;ChargeNet&#x27;,kw:+$(&#x27;#ak&#x27;).value||50,ports:p,free:p,price:16,conn:[&#x27;CCS2&#x27;],st:&#x27;online&#x27;});sv()}
+
+// shell
+const tabs=[[&#x27;plan&#x27;,&#x27;Plan trip&#x27;],[&#x27;veh&#x27;,&#x27;Vehicles&#x27;],[&#x27;trips&#x27;,&#x27;Trips&#x27;],[&#x27;an&#x27;,&#x27;Analytics&#x27;],[&#x27;adm&#x27;,&#x27;Admin&#x27;]];
+function go(t){S.tab=t;tabs.forEach(([k])=&gt;$(&#x27;#t-&#x27;+k).hidden=k!=t);$(&#x27;#nav&#x27;).innerHTML=tabs.map(([k,l])=&gt;`&lt;button class=&quot;${k==t?&#x27;on&#x27;:&#x27;&#x27;}&quot; onclick=&quot;go(&#x27;${k}&#x27;)&quot;&gt;${l}&lt;/button&gt;`).join(&#x27;&#x27;);({veh:renderVeh,trips:renderTrips,an:renderAn,adm:renderAdm}[t]||(()=&gt;0))()}
+function fillV(){$(&#x27;#vi&#x27;).innerHTML=VS.map((v,i)=&gt;`&lt;option value=&quot;${i}&quot;&gt;${v.n} · ${v.cap} kWh&lt;/option&gt;`).join(&#x27;&#x27;);[&#x27;vi&#x27;,&#x27;src&#x27;,&#x27;dst&#x27;,&#x27;soc&#x27;,&#x27;min&#x27;,&#x27;tgt&#x27;,&#x27;pref&#x27;,&#x27;cond&#x27;,&#x27;net&#x27;,&#x27;soh&#x27;].forEach(k=&gt;$(&#x27;#&#x27;+k).value=S[k])}
+$(&#x27;#src&#x27;).innerHTML=$(&#x27;#dst&#x27;).innerHTML=cities.map((c,i)=&gt;`&lt;option value=&quot;${i}&quot;&gt;${c.n}&lt;/option&gt;`).join(&#x27;&#x27;);
+fillV();
+[&#x27;vi&#x27;,&#x27;src&#x27;,&#x27;dst&#x27;,&#x27;soc&#x27;,&#x27;min&#x27;,&#x27;tgt&#x27;,&#x27;pref&#x27;,&#x27;cond&#x27;,&#x27;net&#x27;,&#x27;soh&#x27;].forEach(k=&gt;$(&#x27;#&#x27;+k).addEventListener(&#x27;input&#x27;,e=&gt;{S[k]=[&#x27;pref&#x27;,&#x27;net&#x27;].includes(k)?e.target.value:+e.target.value;upd()}));
+$(&#x27;#out&#x27;).addEventListener(&#x27;click&#x27;,e=&gt;{const r=e.target.closest(&#x27;.rt&#x27;);if(r){if(sim)stopSim();S.sel=+r.dataset.i;upd()}});
+$(&#x27;#sim&#x27;).onclick=()=&gt;{if(sim&amp;&amp;sim.t){stopSim()}else{if(sim)stopSim();startSim()}};
+$(&#x27;#save&#x27;).onclick=()=&gt;{const o=R[S.sel];if(o){addTrip(&#x27;planned&#x27;,o);$(&#x27;#save&#x27;).textContent=&#x27;Saved&#x27;;setTimeout(()=&gt;$(&#x27;#save&#x27;).textContent=&#x27;Save plan&#x27;,1200)}};
+setInterval(()=&gt;{if(!$(&#x27;#live&#x27;).checked)return;Provider.tick(ST);if(sim){if(sim.t){const n=R[S.sel].stops[sim.i];if(n&amp;&amp;n.st.free==0&amp;&amp;!sim.w[&#x27;f&#x27;+sim.i]){sim.w[&#x27;f&#x27;+sim.i]=1;log(n.st.name+&#x27; just filled up. Expect a queue or pick another charger.&#x27;,&#x27;warn&#x27;)}}drawMap();drawSim()}else if(S.tab==&#x27;plan&#x27;)upd()},6000);
+go(&#x27;plan&#x27;);upd();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe><p class="plnote">Tip: sign-in, shared trip history and live charger data arrive with the server version of ChargePath, which this site is designed to connect to.</p></section><div class="cta"><h2>Ready for a calmer road trip?</h2><p>Open the planner and try your first route. It takes about a minute.</p><a class="btn" href="#planner">Open the planner</a></div></div>
+<footer>ChargePath · a prototype for calmer electric journeys in India · prices in ₹</footer>
+<script>
+const $=s=>document.querySelector(s),R=250;
+function go(){const d=+$('#d').value,s=+$('#s').value;$('#v1').textContent=d+' km';$('#v2').textContent=s+'%';
+ const first=R*(s-10)/100;let rem=d-first,st=[],pos=first;while(rem>0&&st.length<12){st.push(pos);pos+=R*.7;rem-=R*.7}
+ const x=p=>10+380*Math.min(1,p/d);let h='<line x1="10" y1="26" x2="390" y2="26" stroke="var(--l)" stroke-width="8" stroke-linecap="round"/><line x1="10" y1="26" x2="'+x(st[0]??d)+'" y2="26" stroke="var(--t)" stroke-width="8" stroke-linecap="round"/>';
+ st.forEach((p,i)=>h+='<circle cx="'+x(p)+'" cy="26" r="11" fill="var(--y)"/><text x="'+x(p)+'" y="30" text-anchor="middle" style="fill:#241f45;font-weight:700">'+(i+1)+'</text>');
+ $('#bar').innerHTML=h+'<text x="10" y="54">Start</text><text x="390" y="54" text-anchor="end">'+d+' km</text>';
+ if(!st.length){$('#h').textContent="You'll make it.";$('#r').textContent='No stops needed. You would arrive with about '+Math.round((first-d)/R*100+10)+'% left.'}
+ else{$('#h').textContent=st.length==1?'One short stop.':st.length+' stops, nicely spaced.';$('#r').textContent='About '+st.length*30+' minutes of charging in total. Time for a coffee and a stretch.'}}
+$('#d').oninput=$('#s').oninput=go;go();
+</script></body></html>
